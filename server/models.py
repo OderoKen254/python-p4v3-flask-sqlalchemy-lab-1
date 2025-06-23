@@ -20,7 +20,7 @@ class Earthquake(db.Model, SerializerMixin):
             'id': self.id,
             'location': self.location,
             'magnitude': self.magnitude,
-            'year': str(self.year)  # Convert year to string
+            'year': int(self.year)  # Convert year to string
         }
 
     def __repr__(self):
