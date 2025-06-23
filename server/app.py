@@ -34,5 +34,14 @@ def get_earthquake(id):
         "year": int(earthquake.year)
     }), 200
 
+@app.route('/earthquakes/magnitude/<float:magnitude>')
+def get_earthquakes_by_magnitude(magnitude):
+    quakes = Earthquake.query.filter(Earthquake.magnitude >= magnitude).all()
+    quake_list = [quake.to_dict() for quake in quakes]
+    return jsonify({
+        'count': len(quake_list),
+        'quakes': quake_list
+    }), 200
+
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
