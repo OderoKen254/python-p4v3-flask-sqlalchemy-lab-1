@@ -15,5 +15,13 @@ class Earthquake(db.Model, SerializerMixin):
     location = db.Column(db.String(255), nullable=False)
     year = db.Column(db.String, nullable=False)
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'location': self.location,
+            'magnitude': self.magnitude,
+            'year': str(self.year)  # Convert year to string
+        }
+
     def __repr__(self):
         return f'<Earthquake {self.id}, {self.magnitude}, {self.location}, {self.year}>'
